@@ -193,6 +193,11 @@ body {
   transition: background 0.1s ease;
 }
 
+.pricing-card__slider:focus-visible {
+  outline: 0.125rem solid var(--clr-primary-strong-cyan);
+  outline-offset: 0.25rem;
+}
+
 /* WebKit Slider Thumb */
 .pricing-card__slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -220,6 +225,13 @@ body {
 }
 
 /* Firefox Slider Thumb */
+.pricing-card__slider::-moz-range-track {
+  height: 0.5rem;
+  border-radius: 0.3125rem;
+  background: transparent;
+  border: none;
+}
+
 .pricing-card__slider::-moz-range-thumb {
   width: 2.5rem;
   height: 2.5rem;
@@ -241,18 +253,6 @@ body {
 .pricing-card__slider::-moz-range-thumb:active {
   background-color: var(--clr-primary-active-cyan);
   cursor: grabbing;
-}
-
-.pricing-card__slider::-moz-range-track {
-  height: 0.5rem;
-  border-radius: 0.3125rem;
-  background: transparent;
-  border: none;
-}
-
-.pricing-card__slider:focus-visible {
-  outline: 0.125rem solid var(--clr-primary-strong-cyan);
-  outline-offset: 0.25rem;
 }
 
 /* Price Display */
@@ -330,25 +330,21 @@ body {
   transition: transform 0.25s ease;
 }
 
-.toggle-switch:hover .toggle-slider {
-  background-color: var(--clr-primary-soft-cyan);
+.toggle-switch__input:focus-visible + .toggle-slider {
+  outline: 0.125rem solid var(--clr-primary-strong-cyan);
+  outline-offset: 0.125rem;
 }
 
 .toggle-switch__input:checked + .toggle-slider {
   background-color: var(--clr-primary-strong-cyan);
 }
 
-.toggle-switch__input:checked:hover + .toggle-slider {
+.toggle-switch:hover .toggle-slider {
   background-color: var(--clr-primary-soft-cyan);
 }
 
 .toggle-switch__input:checked + .toggle-slider::before {
   transform: translateX(1.375rem);
-}
-
-.toggle-switch__input:focus-visible + .toggle-slider {
-  outline: 0.125rem solid var(--clr-primary-strong-cyan);
-  outline-offset: 0.125rem;
 }
 
 /* Discount Badge */
@@ -576,9 +572,9 @@ body {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
   }
 }
