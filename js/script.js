@@ -22,6 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const DISCOUNT_RATE = 0.25; // 25% discount for yearly billing
 
+  // Create dedicated style element for dynamic slider track fill without inline style attributes
+  let dynamicSliderStyle = document.getElementById('slider-progress-style');
+  if (!dynamicSliderStyle) {
+    dynamicSliderStyle = document.createElement('style');
+    dynamicSliderStyle.id = 'slider-progress-style';
+    document.head.appendChild(dynamicSliderStyle);
+  }
+
   /**
    * Updates the UI elements based on current slider position and billing toggle state.
    */
@@ -41,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     pageviewsCount.textContent = tier.pageviews;
     priceAmount.textContent = formattedPrice;
 
-    // Update slider progress bar visually
+    // Update slider progress bar via root variable in dynamic style sheet (avoiding inline style error)
     const min = parseFloat(slider.min) || 0;
     const max = parseFloat(slider.max) || 4;
     const percentage = ((tierIndex - min) / (max - min)) * 100;
-    slider.style.setProperty('--progress', `${percentage}%`);
+    dynamicSliderStyle.textContent = `:root { --slider-progress: ${percentage}%; }`;
 
     // Update accessibility attributes for screen readers
     slider.setAttribute('aria-valuenow', tierIndex.toString());
@@ -56,11 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Event Listeners
-  // Input event triggers continuously while dragging the slider
   slider.addEventListener('input', updatePricing);
   slider.addEventListener('change', updatePricing);
-
-  // Change event triggers when the toggle switch is checked or unchecked
   billingToggle.addEventListener('change', updatePricing);
 
   // Initialize display on initial load

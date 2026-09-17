@@ -29,7 +29,7 @@
   </header>
 
   <main class="main-content">
-    <article class="pricing-card" aria-label="Interactive Pricing Card">
+    <article class="pricing-card">
       <div class="pricing-card__top">
         <!-- Pageviews count -->
         <p class="pricing-card__pageviews" id="pageviews-label">
@@ -42,6 +42,7 @@
           <input 
             type="range" 
             id="price-slider" 
+            class="pricing-card__slider"
             name="price-slider"
             min="0" 
             max="4" 
@@ -50,7 +51,6 @@
             aria-valuemin="0" 
             aria-valuemax="4" 
             aria-valuenow="2"
-            aria-label="Number of pageviews slider"
           >
         </div>
 
@@ -64,29 +64,30 @@
         <div class="pricing-card__billing-toggle">
           <span class="billing-option" id="monthly-label">Monthly Billing</span>
           
-          <label class="toggle-switch" for="billing-toggle">
+          <label class="toggle-switch">
             <input 
               type="checkbox" 
               id="billing-toggle" 
-              name="billing-toggle" 
-              aria-label="Yearly billing with 25% discount"
+              class="toggle-switch__input"
+              name="billing-toggle"
+              aria-labelledby="monthly-label yearly-label"
             >
             <span class="toggle-slider"></span>
           </label>
 
           <span class="billing-option" id="yearly-label">Yearly Billing</span>
 
-          <span class="discount-badge" aria-label="25% discount on yearly billing">
+          <span class="discount-badge">
             <span class="discount-badge__text discount-badge__text--desktop">25% discount</span>
             <span class="discount-badge__text discount-badge__text--mobile">-25%</span>
           </span>
         </div>
       </div>
 
-      <div class="pricing-card__divider" role="separator"></div>
+      <hr class="pricing-card__divider">
 
       <div class="pricing-card__bottom">
-        <ul class="features-list" aria-label="Included features">
+        <ul class="features-list">
           <li class="features-list__item">
             <img class="features-list__icon" src="./images/icon-check.svg" alt="" aria-hidden="true">
             <span>Unlimited websites</span>
