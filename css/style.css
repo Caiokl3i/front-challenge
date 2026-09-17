@@ -29,6 +29,12 @@
   --fw-semibold: 600;
   --fw-extrabold: 800;
 
+  /* Responsive Fluid Dimensions */
+  --header-max-width: min(100%, 37.5rem);
+  --card-max-width: min(100%, 33.75rem);
+  --font-size-title: clamp(1.25rem, 2vw + 0.8rem, 1.75rem);
+  --font-size-amount: clamp(2rem, 3vw + 1.2rem, 2.5rem);
+
   /* Spacing & Borders */
   --card-radius: 0.5rem;
   --card-shadow: 0 1.25rem 1.875rem -0.3125rem hsla(227, 35%, 25%, 0.08), 0 0.625rem 0.625rem -0.3125rem hsla(227, 35%, 25%, 0.04);
@@ -47,10 +53,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-html {
-  font-size: 100%;
 }
 
 body {
@@ -96,8 +98,7 @@ body {
   padding-block: 1.875rem;
   padding-inline: 0.625rem;
   margin-block-end: 1.25rem;
-  width: 100%;
-  max-width: 37.5rem;
+  width: var(--header-max-width);
   background-image: url('../images/pattern-circles.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -110,7 +111,7 @@ body {
 }
 
 .header__title {
-  font-size: 1.25rem; /* 20px */
+  font-size: var(--font-size-title);
   font-weight: var(--fw-extrabold);
   color: var(--clr-neutral-dark-text);
   margin-block-end: 0.5rem;
@@ -133,8 +134,7 @@ body {
    Main Pricing Card (Mobile-First Base Styles)
    -------------------------------------------------------------------------- */
 .main-content {
-  width: 100%;
-  max-width: 33.75rem; /* 540px */
+  width: var(--card-max-width);
   z-index: 2;
 }
 
@@ -265,7 +265,7 @@ body {
 }
 
 .pricing-card__amount {
-  font-size: 2rem; /* 32px */
+  font-size: var(--font-size-amount);
   font-weight: var(--fw-extrabold);
   color: var(--clr-neutral-dark-text);
   letter-spacing: -0.0625rem;
@@ -318,8 +318,7 @@ body {
   transition: background-color 0.25s ease;
 }
 
-.toggle-slider::before {
-  content: "";
+.toggle-knob {
   position: absolute;
   height: 0.875rem; /* 14px */
   width: 0.875rem;
@@ -328,6 +327,11 @@ body {
   background-color: var(--clr-neutral-white);
   border-radius: 50%;
   transition: transform 0.25s ease;
+  pointer-events: none;
+}
+
+.toggle-switch:hover .toggle-slider {
+  background-color: var(--clr-primary-soft-cyan);
 }
 
 .toggle-switch__input:focus-visible + .toggle-slider {
@@ -335,15 +339,11 @@ body {
   outline-offset: 0.125rem;
 }
 
-.toggle-switch__input:checked + .toggle-slider {
+:checked + .toggle-slider {
   background-color: var(--clr-primary-strong-cyan);
 }
 
-.toggle-switch:hover .toggle-slider {
-  background-color: var(--clr-primary-soft-cyan);
-}
-
-.toggle-switch__input:checked + .toggle-slider::before {
+:checked ~ .toggle-knob {
   transform: translateX(1.375rem);
 }
 
@@ -453,14 +453,14 @@ body {
   color: var(--clr-neutral-text);
 }
 
-.attribution a {
+.attribution__link {
   color: var(--clr-neutral-dark-text);
   font-weight: var(--fw-extrabold);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.attribution a:hover {
+.attribution__link:hover {
   color: var(--clr-primary-strong-cyan);
   text-decoration: underline;
 }
@@ -482,7 +482,6 @@ body {
   }
 
   .header__title {
-    font-size: 1.75rem; /* 28px */
     margin-block-end: 0.75rem;
   }
 
@@ -515,10 +514,6 @@ body {
     grid-row: 1 / 2;
     justify-self: end;
     margin-block-end: 0;
-  }
-
-  .pricing-card__amount {
-    font-size: 2.5rem; /* 40px */
   }
 
   .pricing-card__billing-cycle {
