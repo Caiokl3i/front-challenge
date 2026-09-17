@@ -32,6 +32,7 @@
   /* Responsive Fluid Dimensions */
   --header-max-width: min(100%, 37.5rem);
   --card-max-width: min(100%, 33.75rem);
+  --font-size-body: clamp(0.875rem, 0.5vw + 0.75rem, 0.9375rem);
   --font-size-title: clamp(1.25rem, 2vw + 0.8rem, 1.75rem);
   --font-size-amount: clamp(2rem, 3vw + 1.2rem, 2.5rem);
 
@@ -62,7 +63,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   font-family: var(--ff-primary);
-  font-size: 0.9375rem; /* 15px */
+  font-size: var(--font-size-body);
   font-weight: var(--fw-semibold);
   color: var(--clr-neutral-text);
   background-color: var(--clr-neutral-page-bg);
@@ -193,12 +194,7 @@ body {
   transition: background 0.1s ease;
 }
 
-.pricing-card__slider:focus-visible {
-  outline: 0.125rem solid var(--clr-primary-strong-cyan);
-  outline-offset: 0.25rem;
-}
-
-/* WebKit Slider Thumb */
+/* Range Slider Thumbs (Ordered: base pseudo-elements then states) */
 .pricing-card__slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -215,16 +211,6 @@ body {
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.pricing-card__slider::-webkit-slider-thumb:hover {
-  background-color: var(--clr-primary-soft-cyan);
-}
-
-.pricing-card__slider::-webkit-slider-thumb:active {
-  background-color: var(--clr-primary-active-cyan);
-  cursor: grabbing;
-}
-
-/* Firefox Slider Thumb */
 .pricing-card__slider::-moz-range-track {
   height: 0.5rem;
   border-radius: 0.3125rem;
@@ -244,6 +230,20 @@ body {
   cursor: pointer;
   border: none;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pricing-card__slider:focus-visible {
+  outline: 0.125rem solid var(--clr-primary-strong-cyan);
+  outline-offset: 0.25rem;
+}
+
+.pricing-card__slider::-webkit-slider-thumb:hover {
+  background-color: var(--clr-primary-soft-cyan);
+}
+
+.pricing-card__slider::-webkit-slider-thumb:active {
+  background-color: var(--clr-primary-active-cyan);
+  cursor: grabbing;
 }
 
 .pricing-card__slider::-moz-range-thumb:hover {
@@ -294,7 +294,7 @@ body {
   user-select: none;
 }
 
-/* Custom Toggle Switch */
+/* Custom Toggle Switch (Strictly ordered: least to most specific) */
 .toggle-switch {
   position: relative;
   display: inline-block;
@@ -330,6 +330,14 @@ body {
   pointer-events: none;
 }
 
+:checked + .toggle-slider {
+  background-color: var(--clr-primary-strong-cyan);
+}
+
+:checked ~ .toggle-knob {
+  transform: translateX(1.375rem);
+}
+
 .toggle-switch:hover .toggle-slider {
   background-color: var(--clr-primary-soft-cyan);
 }
@@ -337,14 +345,6 @@ body {
 .toggle-switch__input:focus-visible + .toggle-slider {
   outline: 0.125rem solid var(--clr-primary-strong-cyan);
   outline-offset: 0.125rem;
-}
-
-:checked + .toggle-slider {
-  background-color: var(--clr-primary-strong-cyan);
-}
-
-:checked ~ .toggle-knob {
-  transform: translateX(1.375rem);
 }
 
 /* Discount Badge */
